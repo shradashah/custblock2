@@ -46,7 +46,7 @@ function paintMap() {
 	// 	return;
 	// }
 	var url = 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
-	sdk.setContent("%% [ VAR @UID, @url SET @UID = contactKey SET @url = Lookup(\"Content Data - 2019 - 09 - 23 T051232828 \",\"url \",\"contactKey \",@UID)]%%  <img src=\"%%=v(@UID)=%%\"");
+	sdk.setContent("%%[ VAR @UID, @url SET @UID = contactKey SET @url = Lookup(\"Content Data - 2019 - 09 - 23 T051232828 \",\"url \",\"contactKey \",@UID)]%%  <img src=\"%%=v(@UID)=%%\"");
 	sdk.setData({
 		address: address,
 		// width: width,
