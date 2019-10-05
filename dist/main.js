@@ -72,7 +72,7 @@ __webpack_require__(1);
 var SDK = __webpack_require__(19);
 var sdk = new SDK(null, null, true); // 3rd argument true bypassing https requirement: not prod worthy
 
-var address, width, height, zoom, link, mapsKey;
+var address, width, height, zoom, link, jsonloc;
 
 function debounce(func, wait, immediate) {
 	var timeout;
@@ -91,7 +91,7 @@ function debounce(func, wait, immediate) {
 }
 
 function paintSettings() {
-	document.getElementById('text-input-id-0').value = mapsKey;
+	document.getElementById('text-input-id-0').value = jsonloc;
 	// document.getElementById('text-input-id-1').value = address;
 	// document.getElementById('slider-id-01').value = width;
 	// document.getElementById('slider-id-02').value = height;
@@ -105,7 +105,7 @@ function paintSettings() {
 // }
 
 function paintMap() {
-	mapsKey = document.getElementById('text-input-id-0').value;
+	jsonloc = document.getElementById('text-input-id-0').value;
 	// address = document.getElementById('text-input-id-1').value;
 	// width = document.getElementById('slider-id-01').value;
 	// height = document.getElementById('slider-id-02').value;
@@ -114,26 +114,35 @@ function paintMap() {
 	// if (!address) {
 	// 	return;
 	// }
+
+
+	var bl1 = "%%[var @dataurl set @dataurl = HTTPGet(\"";
+	var bl2 = "{{.datasource MSContent source = @dataurl type = variable}}{{.data}} { \"target\": \"@dataurl\",\"filter\": \"uid == [contactKey]\"}";
+	var bl3 = "{{/data}} {{.datasource contacts type = nested}} {{.data}} {\"target\": \"MSContent.content\"} {{/data}}";
+	var bl4 = "{{#if uid == [contactKey]}} <img src = \"{{url}}\"> {{/if}} {{/datasource}} {{/datasource}}";
+
+	var content = bl1 + jsonloc + "\")" + bl2 + bl3 + bl4;
+
 	var url = 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
-	sdk.setContent("%%[ VAR @UID, @url SET @UID = contactKey SET @url = Lookup('Content Data - 2019-09-23T051232828','url','contactKey',@UID)]%%  <img src=\"%%=v(@url)=%%\"");
+	sdk.setContent(content);
 	sdk.setData({
-		address: address,
+		//address: address,
 		// width: width,
 		// height: height,
 		// zoom: zoom,
 		// link: link,
-		mapsKey: mapsKey
+		jsonloc: jsonloc
 	});
-	localStorage.setItem('googlemapsapikeyforblock', mapsKey);
+	localStorage.setItem('jsonlocationforblock', jsonloc);
 }
 
 sdk.getData(function (data) {
-	address = data.address || '';
+	//address = data.address || '';
 	// width = data.width || 400;
 	// height = data.height || 300;
 	// zoom = data.zoom || 15;
 	// link = data.link || '';
-	mapsKey = data.mapsKey || localStorage.getItem('googlemapsapikeyforblock');
+	jsonloc = data.jsonloc || localStorage.getItem('jsonlocationforblock');
 	paintSettings();
 	paintSliderValues();
 	paintMap();
@@ -143,7 +152,6 @@ document.getElementById('workspace').addEventListener("input", function () {
 	debounce(paintMap, 500)();
 	paintSliderValues();
 });
-
 
 /***/ }),
 /* 1 */
