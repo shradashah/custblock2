@@ -123,7 +123,8 @@ function paintMap() {
 
 	var content = bl1 + jsonloc + "\")]%% " + bl2 + bl3 + bl4;
 
-	var url = 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
+	var default_content = "<p>Content Recommendation Powered by Hux&copy;</p>";
+	sdk.setSuperContent(default_content, (newSuperContent) => {});
 	sdk.setContent(content);
 	sdk.setData({
 		//address: address,
