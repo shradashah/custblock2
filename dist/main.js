@@ -119,9 +119,9 @@ function paintMap() {
 	var bl1 = "%%[var @dataurl set @dataurl = HTTPGet(\"";
 	var bl2 = "{{.datasource MSContent source = @dataurl type = variable}}{{.data}} { \"target\": \"@dataurl\",\"filter\": \"uid == [contactKey]\"}";
 	var bl3 = "{{/data}} {{.datasource contacts type = nested}} {{.data}} {\"target\": \"MSContent.content\"} {{/data}}";
-	var bl4 = "{{#if uid == [contactKey]}} <img src = \"{{url}}\"> {{/if}} {{/datasource}} {{/datasource}}";
+	var bl4 = "{{#if uid == [contactKey]}} <img src =\"{{url}}\"> {{/if}} {{/datasource}} {{/datasource}}";
 
-	var content = bl1 + jsonloc + "\")]%%" + bl2 + bl3 + bl4;
+	var content = bl1 + jsonloc + "\")]%% " + bl2 + bl3 + bl4;
 
 	var url = 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
 	sdk.setContent(content);
