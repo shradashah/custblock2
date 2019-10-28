@@ -1,5 +1,5 @@
-# sampleblock
-Sample Salesforce Marketing Cloud Content Builder Block using the [blocksdk](https://github.com/salesforce-marketingcloud/blocksdk).
+# huxcontent
+Hux Decisioning powered Salesforce Marketing Cloud Content Builder Block using the [blocksdk](https://github.com/salesforce-marketingcloud/blocksdk).
 
 ## Deployment
 As a node app:
@@ -16,7 +16,7 @@ One click deployment to heroku:
 
 ```bash
 # do not fork
-git clone https://github.com/tbesluau/sampleblock.git <my block name e.g. myblock>
+git clone https://github.com/misraankit/Hux-content.git <my block name e.g. myblock>
 cd <my block name e.g. mybock>
 # create your own empty github repository for your new block and copy the clone url for it
 git remote set-url origin <your empty repo url>
